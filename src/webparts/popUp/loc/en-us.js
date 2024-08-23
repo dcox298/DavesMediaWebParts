@@ -1,8 +1,10 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
+    "PropertyPaneDescription": "Configure the PopUp App",
+    "BasicGroupName": "The Basics",
     "DescriptionFieldLabel": "Description Field",
+    "buttonTextFieldLabel":"Button Text",
+    "popUpTextFieldLabel":"PopUp Modal Text",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",

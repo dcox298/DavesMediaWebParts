@@ -22,7 +22,11 @@
     "description": { "default": "PopUp description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "PopUp"
+      "buttonText" : "Click Me!",
+      "popUpText" : "",
+      "buttonType":"Primary",
+      "buttonAlignment":"center",
+      "backgroundColor":""
     }
   }]
 }
