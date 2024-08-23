@@ -3,6 +3,8 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
+  PropertyPaneChoiceGroup,
+  PropertyPaneDropdown,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -13,23 +15,45 @@ import PopUp from './components/PopUp';
 import { IPopUpProps } from './components/IPopUpProps';
 
 export interface IPopUpWebPartProps {
-  description: string;
+
+  buttonText: string;
+  buttonType:string;
+  buttonAlignment:"auto" | "center" | "baseline" | "stretch" | "start" | "end"|undefined;
+
+  popUpText:string;
+
+  backgroundColor:string;
+
+
 }
 
 export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartProps> {
 
   private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+
+
+
+
+  /**
+   * onTextChange
+   */
+  private onTextChange = (newText: string):string => {
+    this.properties.popUpText = newText;
+    return newText;
+  }
 
   public render(): void {
     const element: React.ReactElement<IPopUpProps> = React.createElement(
       PopUp,
       {
-        description: this.properties.description,
+        buttonText: this.properties.buttonText,
+        popUpText:this.properties.popUpText,
         isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        displayMode:this.displayMode,
+        onTextChange:this.onTextChange,
+        backgroundColor:this.properties.backgroundColor,
+        buttonType:this.properties.buttonType,
+        buttonAlignment:this.properties.buttonAlignment
       }
     );
 
@@ -38,11 +62,9 @@ export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartPro
 
   protected onInit(): Promise<void> {
     return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+      //this._environmentMessage = message;
     });
   }
-
-
 
   private _getEnvironmentMessage(): Promise<string> {
     if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
@@ -108,8 +130,17 @@ export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartPro
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyPaneTextField('buttonText',{
+                  label:strings.buttonTextFieldLabel,
+                }),
+                PropertyPaneDropdown('buttonType',{
+                  label:'Button Type',
+                  options:[{key:'Primary',text:'Primary'},{key:'Default',text:'Default'}]
+                }),
+                PropertyPaneChoiceGroup('buttonAlignment',{
+                  label:"Button Alignment",
+                  options:[{key:'start',text:'Start'},{key:'center',text:'Center'},{key:'end',text:'End'}]
+
                 })
               ]
             }
