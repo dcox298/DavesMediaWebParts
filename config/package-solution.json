@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "daves-media-web-parts-client-side-solution",
+    "id": "38491369-fe95-4a31-a415-a7d3e624fc58",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "daves-media-web-parts description"
+      },
+      "longDescription": {
+        "default": "daves-media-web-parts description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "daves-media-web-parts Feature",
+        "description": "The feature that activates elements of the daves-media-web-parts solution.",
+        "id": "6edd5e52-ceb2-43d7-8d9c-0be2261cce0a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/daves-media-web-parts.sppkg"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "18.19.0",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "daves-media-web-parts",
+    "libraryId": "38491369-fe95-4a31-a415-a7d3e624fc58",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "daves-media-web-parts",
+    "solutionShortDescription": "daves-media-web-parts description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
