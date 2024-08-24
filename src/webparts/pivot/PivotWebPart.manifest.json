@@ -22,7 +22,12 @@
     "description": { "default": "Pivot description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Pivot"
+      "description": "Pivot content",
+      "tabs":[{
+        "id":0,
+        "headerText":"Tab",
+        "content":"default content"
+      }]
     }
   }]
 }

@@ -1,43 +1,62 @@
 import * as React from 'react';
-import styles from './Pivot.module.scss';
+//import styles from './Pivot.module.scss';
 import type { IPivotProps } from './IPivotProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { Stack, Pivot, PivotItem, TextField, PrimaryButton } from '@fluentui/react';
 
-export default class Pivot extends React.Component<IPivotProps, {}> {
+
+import { RichText } from '@pnp/spfx-controls-react/lib/RichText';
+//import { escape } from '@microsoft/sp-lodash-subset';
+
+export default class PivotRoot extends React.Component<IPivotProps, {}> {
   public render(): React.ReactElement<IPivotProps> {
     const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
+       tabs,
+       displayMode
     } = this.props;
 
     return (
-      <section className={`${styles.pivot} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
+     <Stack>
+        <Stack.Item>
+          <Pivot>
+            {displayMode===2 &&( 
+            <PivotItem
+               key={0}
+               headerText={'Add'}
+              >
+                <Stack>
+                  <Stack.Item align='end'>
+                    <PrimaryButton iconProps={{iconName:'Save'}} />
+                  </Stack.Item>
+                    <Stack.Item>
+                        <TextField label='Tab Header' value={''} />
+                    </Stack.Item>
+                    <Stack.Item>
+                        <RichText value={''}/>
+                    </Stack.Item>
+                    
+                </Stack>
+              </PivotItem>
+            )}
+            {tabs.map((item)=>(
+              <PivotItem
+               key={item.id}
+               headerText={item.headerText}
+              >
+                <Stack>
+                  {displayMode==2 && (
+                    <Stack.Item>
+                        <TextField label='Header' value={item.headerText} />
+                    </Stack.Item>
+                  )}
+                    <Stack.Item>
+                        <RichText isEditMode={displayMode==2} value={item.content}/>
+                    </Stack.Item>
+                </Stack>
+              </PivotItem>
+            ))}
+          </Pivot>
+        </Stack.Item>
+     </Stack>
     );
   }
 }
