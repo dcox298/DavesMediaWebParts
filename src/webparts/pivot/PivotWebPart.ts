@@ -9,11 +9,13 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'PivotWebPartStrings';
-import Pivot from './components/Pivot';
+import PivotRoot from './components/Pivot';
 import { IPivotProps } from './components/IPivotProps';
+import { IDavesPivotItem } from './models/IDavesPivotItem';
 
 export interface IPivotWebPartProps {
   description: string;
+  tabs:IDavesPivotItem[];
 }
 
 export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartProps> {
@@ -23,13 +25,15 @@ export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartPro
 
   public render(): void {
     const element: React.ReactElement<IPivotProps> = React.createElement(
-      Pivot,
+      PivotRoot,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
+        userDisplayName: this.context.pageContext.user.displayName,
+        tabs:this.properties.tabs,
+        displayMode:this.displayMode,
       }
     );
 

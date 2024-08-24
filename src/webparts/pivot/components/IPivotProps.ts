@@ -1,7 +1,11 @@
+import { IDavesPivotItem } from "../models/IDavesPivotItem";
+
 export interface IPivotProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+  displayMode:number;
+  description?: string;
+  isDarkTheme?: boolean;
+  environmentMessage?: string;
+  hasTeamsContext?: boolean;
+  userDisplayName?: string;
+  tabs:IDavesPivotItem[];
 }
