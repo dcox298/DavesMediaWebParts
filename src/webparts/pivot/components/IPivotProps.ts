@@ -8,4 +8,5 @@ export interface IPivotProps {
   hasTeamsContext?: boolean;
   userDisplayName?: string;
   tabs:IDavesPivotItem[];
+  onSave:any;
 }

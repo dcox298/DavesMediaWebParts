@@ -23,6 +23,12 @@ export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartPro
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
+
+  private onSave = (newTabs:IDavesPivotItem[]):void =>{
+    this.properties.tabs=newTabs;
+    this.render();
+  }
+
   public render(): void {
     const element: React.ReactElement<IPivotProps> = React.createElement(
       PivotRoot,
@@ -34,6 +40,7 @@ export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartPro
         userDisplayName: this.context.pageContext.user.displayName,
         tabs:this.properties.tabs,
         displayMode:this.displayMode,
+        onSave:this.onSave
       }
     );
 
