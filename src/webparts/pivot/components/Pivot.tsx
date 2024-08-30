@@ -2,39 +2,35 @@ import * as React from 'react';
 //import styles from './Pivot.module.scss';
 import type { IPivotProps } from './IPivotProps';
 import { Stack, Pivot, PivotItem, TextField, PrimaryButton } from '@fluentui/react';
-
-
-import { RichText } from '@pnp/spfx-controls-react/lib/RichText';
 import { IDavesPivotItem } from '../models/IDavesPivotItem';
-//import { escape } from '@microsoft/sp-lodash-subset';
+import DavesRichText from './DavesRichText';
 
 interface IPivotState {
   currentTab:IDavesPivotItem
 }
 export default class PivotRoot extends React.Component<IPivotProps, IPivotState> {
-     /**
-   * onTextChange
-   */
-     private onTextChange = (newText: string):string => {
-   
-      return newText;
-    }
-    
+
   constructor(props:IPivotProps){
     super(props);
     this.state={
       currentTab:{
-        id:1,
-        headerText:'T',
+        id:0,
+        headerText:'',
         content:''
       }
     }
     this.onSubmit=this.onSubmit.bind(this);
     this.onHeaderUpdate=this.onHeaderUpdate.bind(this);
+    this.onContentUpdate=this.onContentUpdate.bind(this);
   }
   private onSubmit():void{
     let newArray:IDavesPivotItem[]=this.props.tabs;
     newArray.push(this.state.currentTab);
+    this.setState({currentTab:{
+      id:0,
+      headerText:'',
+      content:''
+    }});
     this.props.onSave(newArray);
   }
   private onHeaderUpdate(ev: any,newValue: any):void{
@@ -46,6 +42,17 @@ export default class PivotRoot extends React.Component<IPivotProps, IPivotState>
         content:tab.content
       }
     })
+  }
+  private onContentUpdate(text:string){
+    const tab:IDavesPivotItem=this.state.currentTab;
+    this.setState({
+      currentTab:{
+        id:tab.id,
+        headerText:tab.headerText,
+        content:text
+      }
+    })
+    return text
   }
   public render(): React.ReactElement<IPivotProps> {
     const {
@@ -71,7 +78,7 @@ export default class PivotRoot extends React.Component<IPivotProps, IPivotState>
                         <TextField label='Tab Header' value={this.state.currentTab.headerText} onChange={this.onHeaderUpdate} />
                     </Stack.Item>
                     <Stack.Item>
-                        <RichText value={''}/>
+                        <DavesRichText displayMode={displayMode} content={this.state.currentTab.content||''} onChange={this.onContentUpdate} />
                     </Stack.Item>
                     
                 </Stack>
@@ -89,7 +96,7 @@ export default class PivotRoot extends React.Component<IPivotProps, IPivotState>
                     </Stack.Item>
                   )}
                     <Stack.Item>
-                        <RichText isEditMode={displayMode==2} value={item.content} onChange={(text)=>this.onTextChange(text)}/>
+                      <DavesRichText displayMode={displayMode} content={item.content || ''} onChange={undefined} />
                     </Stack.Item>
                 </Stack>
               </PivotItem>
