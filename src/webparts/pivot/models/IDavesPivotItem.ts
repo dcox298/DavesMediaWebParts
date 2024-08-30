@@ -1,5 +1,5 @@
 export interface IDavesPivotItem {
-    id?:number;
+    key?:string;
     headerText?:string;
     content?:string;
 }
