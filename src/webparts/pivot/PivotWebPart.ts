@@ -24,9 +24,31 @@ export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartPro
   private _environmentMessage: string = '';
 
 
-  private onSave = (newTabs:IDavesPivotItem[]):void =>{
-    this.properties.tabs=newTabs;
+  private onDelete = (selTab:IDavesPivotItem):IDavesPivotItem =>{
+    const currentTabs:IDavesPivotItem[]=this.properties.tabs;
+    const newTabs:IDavesPivotItem[]= currentTabs.filter(tab => tab != selTab);
+    let orderedTabs:IDavesPivotItem[]=newTabs.map((value,i)=>{
+      return {
+        key:i.toString(),
+        headerText:value.headerText,
+        content:value.content
+      }
+    });
+    this.properties.tabs=orderedTabs;
+    const otherTab=this.properties.tabs.length!==0?this.properties.tabs[0]:{key:'add',headerText:'',content:''};
     this.render();
+    return otherTab
+  }
+  private onAdd = ():IDavesPivotItem =>{
+    const currentTabs:IDavesPivotItem[]=this.properties.tabs;
+    const newTab:IDavesPivotItem = {
+      key:this.properties.tabs.length.toString(),
+      headerText:undefined,
+      content:''
+    }
+    currentTabs.push(newTab)
+    this.properties.tabs=currentTabs;
+    return newTab
   }
 
   public render(): void {
@@ -40,7 +62,8 @@ export default class PivotWebPart extends BaseClientSideWebPart<IPivotWebPartPro
         userDisplayName: this.context.pageContext.user.displayName,
         tabs:this.properties.tabs,
         displayMode:this.displayMode,
-        onSave:this.onSave
+        onDelete:this.onDelete,
+        onAdd:this.onAdd
       }
     );
 
