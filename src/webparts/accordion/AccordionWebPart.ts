@@ -11,15 +11,45 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'AccordionWebPartStrings';
 import Accordion from './components/AccordionRoot';
 import { IAccordionProps } from './components/IAccordionProps';
+import { IDavesAccordion } from './models/IDavesAccordion';
 
 export interface IAccordionWebPartProps {
   description: string;
+  accordianItems:IDavesAccordion[];
 }
 
 export default class AccordionWebPart extends BaseClientSideWebPart<IAccordionWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
+
+  private onDelete = (selTab:IDavesAccordion):IDavesAccordion =>{
+    const currentaccordianItems:IDavesAccordion[]=this.properties.accordianItems;
+    const newaccordianItems:IDavesAccordion[]= currentaccordianItems.filter(tab => tab != selTab);
+    let orderedaccordianItems:IDavesAccordion[]=newaccordianItems.map((value,i)=>{
+      return {
+        key:i.toString(),
+        headerText:value.headerText,
+        content:value.content
+      }
+    });
+
+    this.properties.accordianItems=orderedaccordianItems;
+    const otherTab=this.properties.accordianItems.length!==0?this.properties.accordianItems[0]:{key:'add',headerText:'',content:''};
+    this.render();
+    return otherTab
+  }
+  private onAdd = ():IDavesAccordion =>{
+    const currentaccordianItems:IDavesAccordion[]=this.properties.accordianItems;
+    const newTab:IDavesAccordion = {
+      key:this.properties.accordianItems.length.toString(),
+      headerText:undefined,
+      content:''
+    }
+    currentaccordianItems.push(newTab)
+    this.properties.accordianItems=currentaccordianItems;
+    return newTab
+  }
 
   public render(): void {
     const element: React.ReactElement<IAccordionProps> = React.createElement(
@@ -30,7 +60,10 @@ export default class AccordionWebPart extends BaseClientSideWebPart<IAccordionWe
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
-        displayMode: this.displayMode
+        displayMode: this.displayMode,
+        accordianItems:this.properties.accordianItems,
+        onDelete:this.onDelete,
+        onAdd:this.onAdd
       }
     );
 

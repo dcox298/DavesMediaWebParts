@@ -4,8 +4,36 @@ import type { IAccordionProps } from './IAccordionProps';
 import { PrimaryButton, Stack } from '@fluentui/react';
 import { Accordion } from "@pnp/spfx-controls-react/lib/Accordion";
 import { RichText } from '@pnp/spfx-controls-react/lib/RichText';
+import { IDavesAccordion } from '../models/IDavesAccordion';
 
-export default class AccordionRoot extends React.Component<IAccordionProps, {}> {
+interface IAccordionState {
+  current?:IDavesAccordion;
+}
+
+export default class AccordionRoot extends React.Component<IAccordionProps, IAccordionState> {
+
+  constructor(props:IAccordionProps){
+    super(props);
+    this.state={
+ 
+    }
+    this.onDelete=this.onDelete.bind(this);
+    this.onHeaderUpdate=this.onHeaderUpdate.bind(this);
+    this.onContentUpdate=this.onContentUpdate.bind(this);
+    this.onSelectedTab=this.onSelectedTab.bind(this);
+  }
+  private onDelete():void{
+
+  }
+  private onHeaderUpdate(ev: any,newValue: any):void{
+
+  }
+  private onContentUpdate(text:string){
+
+  }
+  private onSelectedTab(item?: any, ev?: React.MouseEvent<HTMLElement>){
+
+  }
   public render(): React.ReactElement<IAccordionProps> {
     const {
       displayMode

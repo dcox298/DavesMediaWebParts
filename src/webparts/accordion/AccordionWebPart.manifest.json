@@ -22,7 +22,14 @@
     "description": { "default": "Accordion description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "Accordion"
+      "description": "Accordion",
+      "accordianItems":[
+        {
+          "key":"0",
+          "headerText":"header 1",
+          "content":"<h3>lorem ipsum</h3>"
+        }
+      ]
     }
   }]
 }
