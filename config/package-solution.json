@@ -1,34 +1,34 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "daves-media-web-parts-client-side-solution",
+    "name": "Daves Media Web Parts",
     "id": "38491369-fe95-4a31-a415-a7d3e624fc58",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
+      "name": "David Cox",
+      "websiteUrl": "https://github.com/dcox298",
       "privacyUrl": "",
       "termsOfUseUrl": "",
       "mpnId": "Undefined-1.19.0"
     },
     "metadata": {
       "shortDescription": {
-        "default": "daves-media-web-parts description"
+        "default": "Daves Media Web Pats client side solution"
       },
       "longDescription": {
-        "default": "daves-media-web-parts description"
+        "default": "Daves Media Web Pats client side solution"
       },
       "screenshotPaths": [],
       "videoUrl": "",
-      "categories": []
+      "categories": ["Site Design"]
     },
     "features": [
       {
-        "title": "daves-media-web-parts Feature",
-        "description": "The feature that activates elements of the daves-media-web-parts solution.",
+        "title": "Daves Media Web Parts Feature",
+        "description": "The feature that activates elements of the Daves Media Web Parts solution.",
         "id": "6edd5e52-ceb2-43d7-8d9c-0be2261cce0a",
         "version": "1.0.0.0"
       }

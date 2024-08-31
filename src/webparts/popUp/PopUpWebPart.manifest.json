@@ -17,10 +17,10 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
-    "group": { "default": "Advanced" },
+    "group": { "default": "Daves Media Web Parts" },
     "title": { "default": "PopUp" },
-    "description": { "default": "PopUp description" },
-    "officeFabricIconFontName": "Page",
+    "description": { "default": "PopUp SPFx app" },
+    "officeFabricIconFontName": "Photo",
     "properties": {
       "buttonText" : "Click Me!",
       "popUpText" : "",
