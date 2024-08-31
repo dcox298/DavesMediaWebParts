@@ -4,8 +4,6 @@
 
 A collection of simple media web parts. 
 
-[picture of the solution in action, if possible]
-
 ## Used SharePoint Framework Version
 
 ![version](https://img.shields.io/badge/version-1.19.0-green.svg)
@@ -15,24 +13,20 @@ A collection of simple media web parts.
 - [SharePoint Framework](https://aka.ms/spfx)
 - [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
 
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
-
 ## Prerequisites
 
 > Any special pre-requisites?
+@pnp/spfx-controls-react
 
-## Solution
+## Author
 
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (David Cox, myself, twitter alias with link) |
+David Cox
 
 ## Version history
 
 | Version | Date             | Comments        |
 | ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+| 1.0     | August 31, 2024  | Initial         |
 
 ## Disclaimer
 
