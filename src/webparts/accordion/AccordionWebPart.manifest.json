@@ -28,6 +28,11 @@
           "key":"0",
           "headerText":"header 1",
           "content":"<h3>lorem ipsum</h3>"
+        },
+        {
+          "key":"1",
+          "headerText":"header 2",
+          "content":"<h3>ipsum lorem </h3>"
         }
       ]
     }

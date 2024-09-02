@@ -15,12 +15,12 @@ export default class AccordionRoot extends React.Component<IAccordionProps, IAcc
   constructor(props:IAccordionProps){
     super(props);
     this.state={
- 
+      
     }
     this.onDelete=this.onDelete.bind(this);
     this.onHeaderUpdate=this.onHeaderUpdate.bind(this);
     this.onContentUpdate=this.onContentUpdate.bind(this);
-    this.onSelectedTab=this.onSelectedTab.bind(this);
+    this.onAddButtonCLick=this.onAddButtonCLick.bind(this);
   }
   private onDelete():void{
 
@@ -31,31 +31,32 @@ export default class AccordionRoot extends React.Component<IAccordionProps, IAcc
   private onContentUpdate(text:string){
 
   }
-  private onSelectedTab(item?: any, ev?: React.MouseEvent<HTMLElement>){
-
+  private onAddButtonCLick(item?: any, ev?: React.MouseEvent<HTMLElement>){
+    const newAccordian:IDavesAccordion=this.props.onAdd();
+    this.setState({current:newAccordian});
   }
   public render(): React.ReactElement<IAccordionProps> {
     const {
-      displayMode
-    } = this.props;
+      displayMode,
 
+    } = this.props;
+    const accordianItems:IDavesAccordion[]= [...this.props.accordianItems].reverse();
     return (
       <>
       {displayMode===2 && (
         <Stack horizontal >
           <Stack.Item>
-            <PrimaryButton iconProps={{iconName:'add'}} />
+            <PrimaryButton iconProps={{iconName:'add'}} onClick={this.onAddButtonCLick}/>
           </Stack.Item>
         </Stack>
       )}
       <Stack>
         <Stack.Item>
-          <Accordion title={'once'} defaultCollapsed={displayMode!==2}>
-            <RichText isEditMode={displayMode===2} value='<p>sample text</p>'/>
-          </Accordion>
-          <Accordion title={'twp'} defaultCollapsed={displayMode!==2}>
-            <RichText isEditMode={displayMode===2} value='<p>sample text 2</p>'/>
-          </Accordion>
+          {accordianItems.map((accordion,index)=>(
+            <Accordion title={accordion.headerText||''} key={accordion.key} defaultCollapsed={displayMode!==2}         >
+              <RichText isEditMode={displayMode===2} value={accordion.content}/>
+            </Accordion>
+        ))}
         </Stack.Item>
       </Stack>
       </>

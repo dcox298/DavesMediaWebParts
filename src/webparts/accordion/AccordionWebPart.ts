@@ -43,7 +43,7 @@ export default class AccordionWebPart extends BaseClientSideWebPart<IAccordionWe
     const currentaccordianItems:IDavesAccordion[]=this.properties.accordianItems;
     const newTab:IDavesAccordion = {
       key:this.properties.accordianItems.length.toString(),
-      headerText:undefined,
+      headerText:'*new',
       content:''
     }
     currentaccordianItems.push(newTab)
