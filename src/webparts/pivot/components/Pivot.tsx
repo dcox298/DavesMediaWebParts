@@ -87,8 +87,9 @@ export default class PivotRoot extends React.Component<IPivotProps, IPivotState>
             )}
             {reversedArrary.map((item)=>(
               <PivotItem
-               itemKey={item.key}
-               headerText={item.headerText||'*New*'}
+                key={item.key}
+                itemKey={item.key}
+                headerText={item.headerText||'*New*'}
               >
                 <Stack>
                   {(displayMode===2 && this.state.currentTab===item)? (

@@ -23,21 +23,19 @@ export default class AccordionWebPart extends BaseClientSideWebPart<IAccordionWe
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
-  private onDelete = (selTab:IDavesAccordion):IDavesAccordion =>{
+  private onDelete = (selAccordion:IDavesAccordion):void =>{
     const currentaccordianItems:IDavesAccordion[]=this.properties.accordianItems;
-    const newaccordianItems:IDavesAccordion[]= currentaccordianItems.filter(tab => tab != selTab);
-    let orderedaccordianItems:IDavesAccordion[]=newaccordianItems.map((value,i)=>{
+    const newaccordianItems:IDavesAccordion[]= currentaccordianItems.filter(acc => acc !== selAccordion);
+    const orderedaccordianItems:IDavesAccordion[]=newaccordianItems.map((acc,i)=>{
       return {
         key:i.toString(),
-        headerText:value.headerText,
-        content:value.content
+        headerText:acc.headerText,
+        content:acc.content
       }
     });
 
     this.properties.accordianItems=orderedaccordianItems;
-    const otherTab=this.properties.accordianItems.length!==0?this.properties.accordianItems[0]:{key:'add',headerText:'',content:''};
     this.render();
-    return otherTab
   }
   private onAdd = ():IDavesAccordion =>{
     const currentaccordianItems:IDavesAccordion[]=this.properties.accordianItems;
