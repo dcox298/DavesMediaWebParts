@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'PopUpWebPartStrings';
 import PopUp from './components/PopUp';
 import { IPopUpProps } from './components/IPopUpProps';
+import { Depths } from '@fluentui/react/lib/Theme';
 
 export interface IPopUpWebPartProps {
 
@@ -23,10 +24,20 @@ export interface IPopUpWebPartProps {
   popUpText:string;
 
   backgroundColor:string;
+  elevation:string;
 
 
 }
-
+const setElevation = (key: string): string => {
+  const elevations: { [key: string]: string } = {
+    '0': Depths.depth0,
+    '4': Depths.depth4,
+    '8': Depths.depth8,
+    '16':Depths.depth16,
+    '64':Depths.depth64
+  };
+  return elevations[key] || Depths.depth0;
+}
 export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartProps> {
 
   private _isDarkTheme: boolean = false;
@@ -51,6 +62,7 @@ export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartPro
         isDarkTheme: this._isDarkTheme,
         displayMode:this.displayMode,
         onTextChange:this.onTextChange,
+        elevation:setElevation(this.properties.elevation),
         backgroundColor:this.properties.backgroundColor,
         buttonType:this.properties.buttonType,
         buttonAlignment:this.properties.buttonAlignment
@@ -141,6 +153,15 @@ export default class PopUpWebPart extends BaseClientSideWebPart<IPopUpWebPartPro
                   label:"Button Alignment",
                   options:[{key:'start',text:'Start'},{key:'center',text:'Center'},{key:'end',text:'End'}]
 
+                })
+              ]
+            },
+            {
+              groupName: 'Background',
+              groupFields: [
+                PropertyPaneDropdown('elevation',{
+                  label:'Elevation',
+                  options:[{key:'0',text:'None'},{key:'4',text:'4'},{key:'8',text:'8'},{key:'16',text:'16'},{key:'36',text:'36'}]
                 })
               ]
             }

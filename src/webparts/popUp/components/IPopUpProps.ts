@@ -9,5 +9,7 @@ export interface IPopUpProps {
   onTextChange?:any;
   displayMode:number
 
+  elevation:string;
   backgroundColor:string;
+  
 }

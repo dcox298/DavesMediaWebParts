@@ -4,7 +4,7 @@ import type { IPopUpProps } from './IPopUpProps';
 //import { escape } from '@microsoft/sp-lodash-subset';
 import { IStackItemStyles, IStackStyles, IStackTokens, Stack } from '@fluentui/react/lib/Stack';
 
-import { DefaultButton, DefaultEffects, IButtonStyles, Modal, PrimaryButton,  } from '@fluentui/react';
+import { DefaultButton, DefaultEffects, Depths, IButtonStyles, Modal, PrimaryButton,  } from '@fluentui/react';
 import { RichText } from "@pnp/spfx-controls-react/lib/RichText";
 
 
@@ -71,12 +71,13 @@ export default class PopUp extends React.Component<IPopUpProps, IPopUpState> {
       popUpText,
       displayMode,
       buttonType,
-      buttonAlignment
+      buttonAlignment,
+      elevation
     } = this.props;
 
     return (
       <>
-      <Stack enableScopedSelectors tokens={outerStackTokens}>
+      <Stack enableScopedSelectors tokens={outerStackTokens} styles={{root:{boxShadow:elevation}}}>
         <Stack enableScopedSelectors styles={stackStyles} tokens={innerStackTokens}>
           {displayMode===2 && (
             <Stack.Item grow styles={stackItemStyles}>
